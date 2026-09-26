@@ -1,40 +1,83 @@
 //EJERCICIO A
 
+
 #include <stdio.h>
 
-int main (void) {
-    char letra[1];
-    int numero[1];
-    int esletra[1];
 
-    esletra [0]=0;
+char desplazar_caracter(char c, int desplazamiento){
+
+    if (c >= 'A' && c <= 'Z') {
+
+        c = c + desplazamiento;
+
+        if (c > 'Z') { c = c - 26; }
+        else if (c < 'A') { c = c + 26; }
+    }
+    else if (c >= 'a' && c <= 'z') {
+
+        c = c + desplazamiento;
+
+        if (c > 'z') { c = c - 26; } 
+        else if (c < 'a') { c = c + 26; } 
+    }
+}
+
+
+int main (void) {
+    char letra;
+    int numero;
+    int esletra;
+    char cifrado[20];
+
+    esletra = 0;
+    
+    printf ("Escriba Cifrar o Descifrar\n");
+    scanf ("%19s",cifrado);
+
+    if (!((cifrado[0]=='C')||(cifrado[0]=='D'))) { return 1; }
 
     printf ("Escriba una letra (puede ser caracter)\n");
-    scanf ("%c",&letra[0]);
+    scanf (" %c",&letra);
 
     printf ("Escriba un desplazamiento entre 1 y 25\n");
-    scanf ("%d",&numero[0]);
+    scanf ("%d",&numero);
     
-    int numletra = letra[0];
+    int numletra = letra;
 
-    if (((numletra<65)&&(numletra>90))||((numletra<97)&&(numletra>122))) {
-        esletra[0]=1;
-    }
+    if (cifrado[0]=='D') { numero=-numero;};
 
-    if (esletra[0]=1){
-        if ((numletra>=65)&&(numletra<=90)) {
-            numletra= numletra + numero[0];
-            if (numletra>=91)  {numletra=numletra-26; }
-        } 
-        else if ((numletra>=97)&&(numletra<=122)) {
-            numletra= numletra + numero[0];
-            if (numletra>=123)  {numletra=numletra-26; }
-        } 
-    }
+    char letrafinal =  desplazar_caracter(letra, numero);
 
-    char letrafinal = numletra;
-
-    printf("Tu letra es la %c \n",letrafinal);
+    printf("Tu caracter es la %c \n",letrafinal);
     
     return 0;
 }
+
+
+/*
+   if (((numletra >= 65 && numletra <= 90) || (numletra >= 97 && numletra <= 122)))  
+        {esletra = 1; }
+
+    if (esletra==1){
+        if ((numletra>=65)&&(numletra<=90)) {
+            if (cifrado[0]=='C') 
+                { numletra= numletra + numero; 
+                 if (numletra>=91)  {numletra=numletra-26;}
+            }
+            else if (cifrado [0]=='D') 
+                { numletra= numletra - numero; 
+                 if (numletra<65)  {numletra=numletra+26;}
+            }
+        } 
+
+        else if ((numletra>=97)&&(numletra<=122)) {
+            if (cifrado[0]=='C') {
+                 numletra= numletra + numero; 
+                if (numletra>=123)  {numletra=numletra-26; }
+            }
+            else if (cifrado[0]=='D') {
+                 numletra= numletra - numero; 
+                 if (numletra<97)  {numletra=numletra+26;}
+            }
+        } 
+    } */ 
